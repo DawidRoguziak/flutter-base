@@ -1,6 +1,7 @@
 import 'package:my_finance_calculator/pages/PageLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'core/extensions/dio.dart';
 
 Future main() async {
   runApp(const ProviderScope(child: RootWidget()));
