@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_finance_calculator/notifiers/auth-failure/AuthFailure.dart';
+import 'package:my_finance_calculator/core/immutables/auth-failure/AuthFailure.dart';
 import 'package:my_finance_calculator/storage/credentials/StorageCredentials.dart';
 import 'package:my_finance_calculator/core/utils/encoders.dart';
 import 'package:oauth2/oauth2.dart';
@@ -47,7 +47,8 @@ class ServiceGithubAuthenticator {
       final storedCredentials = await _storageCredentials.read();
       if (storedCredentials != null) {
         if (storedCredentials.canRefresh && storedCredentials.isExpired) {
-          // refresh method
+          final failureCredentials = await refresh(storedCredentials);
+          return failureCredentials.fold((l) => null, (r) => r);
         }
       }
 
@@ -119,7 +120,7 @@ class ServiceGithubAuthenticator {
     }
   }
 
-  Future<Either<AuthFailure, Credentials>> refersh(
+  Future<Either<AuthFailure, Credentials>> refresh(
     Credentials credentials,
   ) async {
     try {
