@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_finance_calculator/core/immutables/auth-failure/AuthFailure.dart';
+import 'package:my_finance_calculator/notifiers/auth/AuthFailure.dart';
 import 'package:my_finance_calculator/storage/credentials/StorageCredentials.dart';
 import 'package:my_finance_calculator/core/utils/encoders.dart';
 import 'package:oauth2/oauth2.dart';
