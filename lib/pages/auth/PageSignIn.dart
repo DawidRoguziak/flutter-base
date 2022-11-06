@@ -1,10 +1,70 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class PageSignIn extends StatelessWidget {
-  PageSignIn({Key? key}) : super(key: key);
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:my_finance_calculator/core/auth/ProviderAuth.dart';
+import 'package:my_finance_calculator/pages/auth/PageAuth.dart';
+import 'package:my_finance_calculator/router/AppRouter.gr.dart';
+
+class PageSignIn extends ConsumerWidget {
+  const PageSignIn({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Container();
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 48),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Icon(
+                    MdiIcons.github,
+                    size: 150,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Welcome to\nRepo Viewer',
+                    style: Theme.of(context).textTheme.headline3,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 32),
+                  ElevatedButton(
+                    onPressed: () {
+                      ref.read(providerAuthNotifier.notifier).signIn(
+                        (authorizationUrl) {
+                          final completer = Completer<Uri>();
+
+                          AutoRouter.of(context).push(
+                            PageAuthorizationRoute(
+                              authUrl: authorizationUrl,
+                              onAuthCodeRedirectAttempt: (redirectUrl) {
+                                completer.complete(redirectUrl);
+                              },
+                            ),
+                          );
+
+                          return completer.future;
+                        },
+                      );
+                    },
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Color(0xAAee4266)),
+                    ),
+                    child: Text('Sign in'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
