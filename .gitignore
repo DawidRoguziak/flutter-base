@@ -44,5 +44,6 @@ app.*.map.json
 /android/app/release
 
 *.g.dart 
+*.gr.dart 
 *.freezed.dart
 /lib/secrets.dart

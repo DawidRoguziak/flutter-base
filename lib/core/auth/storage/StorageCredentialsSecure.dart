@@ -1,7 +1,6 @@
-import 'package:my_finance_calculator/storage/credentials/StorageCredentials.dart';
+import 'package:my_finance_calculator/core/auth/storage/StorageCredentials.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:oauth2/oauth2.dart';
-
 
 class StorageCredentialsSecure implements StorageCredentials {
   final FlutterSecureStorage _storage;

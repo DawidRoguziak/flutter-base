@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:my_finance_calculator/notifiers/auth/AuthFailure.dart';
+import 'package:my_finance_calculator/core/auth/AuthFailure.dart';
 
 part 'StateAuth.freezed.dart';
 

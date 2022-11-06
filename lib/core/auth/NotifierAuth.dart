@@ -1,6 +1,6 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:my_finance_calculator/notifiers/auth/StateAuth.dart';
-import 'package:my_finance_calculator/services/auth/ServiceGithubAuthenticator.dart';
+import 'package:riverpod/riverpod.dart';
+import 'package:my_finance_calculator/core/auth/StateAuth.dart';
+import 'package:my_finance_calculator/core/auth/ServiceGithubAuthenticator.dart';
 
 typedef AuthUriCallback = Future<Uri> Function(Uri authorizationUrl);
 
